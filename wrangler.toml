@@ -1,0 +1,30 @@
+# 中俄互译 · Lite — Cloudflare Pages 配置
+name = "zhru-fanyi-lite"
+compatibility_date = "2026-05-03"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "./public"
+
+# 必需密钥请通过 Cloudflare Dashboard → Settings → Variables and Secrets 设置：
+#   NVIDIA_API_KEY = NVIDIA NIM API Key（Secret）
+# 不要把真实密钥写入此文件或提交到 Git。
+
+[vars]
+MODEL = "nvidia/nemotron-3-ultra-550b-a55b"
+RATE_LIMIT_MAX = "15"
+RATE_LIMIT_WINDOW_SECONDS = "60"
+TIMEOUT_MS = "60000"
+MAX_SOURCE_LENGTH = "20000"
+MAX_REQUEST_BYTES = "100000"
+MIN_INTERVAL_MS = "4800"
+# 翻译结果缓存：只对不超过 CACHE_MAX_TEXT_LENGTH 字符的原文生效，
+# 最多缓存 CACHE_MAX 条，TTL 5 分钟（TTL 见 translate.js 的 CONFIG.CACHE_TTL_MS）。
+# 注意缓存是 isolate 内存级的，只在同一 isolate 内命中。
+CACHE_MAX = "200"
+CACHE_MAX_TEXT_LENGTH = "4000"
+
+# 推荐：创建 Cloudflare KV namespace 后，在 Dashboard 中绑定变量 RATE_LIMIT_KV，
+# 或取消注释并替换真实 namespace id。没有 KV 时使用单 isolate 内存限流（尽力而为）。
+# 注意：KV 限流每次放行都会产生 1 次读 + 1 次写，免费额度为 1000 次写/天。
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT_KV"
+# id = "replace-with-your-kv-namespace-id"

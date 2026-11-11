@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="中俄互译 · Lite —— 一次输入，同时生成中文与俄语译文"
+    />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <title>中俄互译 · Lite</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="hwrap">
+        <b class="name" id="appName">中俄互译 · Lite</b>
+        <div class="spacer"></div>
+        <button class="iconbtn" id="themeBtn" aria-label="切换主题">
+          <svg
+            class="ic-moon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+          <svg
+            class="ic-sun"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+        </button>
+      </div>
+    </header>
+    <main>
+      <p class="tagline" id="tagline">一次输入，同时生成中文与俄语译文</p>
+      <section class="card editor">
+        <div class="bar">
+          <span class="label">原文</span><span class="count" id="count">0 字符</span>
+        </div>
+        <textarea
+          id="source"
+          placeholder="输入或粘贴需要翻译的内容……"
+          maxlength="20000"
+          spellcheck="false"
+        ></textarea>
+        <div class="bar ft">
+          <span class="hint" id="hint"
+            >停止输入 0.75 秒后自动翻译</span
+          >
+          <div class="btns">
+            <button class="btn" id="clear">清空</button>
+            <button class="btn" id="paste" aria-label="从剪贴板粘贴内容">粘贴</button>
+            <button class="btn primary" id="go">翻译</button>
+          </div>
+        </div>
+      </section>
+      <section class="outputs" aria-label="翻译结果">
+        <article class="card result" data-k="zh">
+          <div class="reshead">
+            <div class="lang"><span class="langname">中文</span><span class="code">ZH</span></div>
+            <button class="copy">复制</button>
+          </div>
+          <div class="output empty" id="out-zh" lang="zh-CN">译文将在这里显示</div>
+        </article>
+        <article class="card result" data-k="ru">
+          <div class="reshead">
+            <div class="lang"><span class="langname">俄语</span><span class="code">RU</span></div>
+            <button class="copy">复制</button>
+          </div>
+          <div class="output empty" id="out-ru" lang="ru">译文将在这里显示</div>
+        </article>
+      </section>
+    </main>
+    <div class="status" role="status" aria-live="polite">
+      <span class="sdot" id="dot"></span><span class="msg" id="statusMsg">就绪 · 等待输入</span>
+    </div>
+    <script type="module" src="app.js?v=20261112-zhru-1"></script>
+  </body>
+</html>
